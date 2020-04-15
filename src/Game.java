@@ -55,10 +55,12 @@ public class Game extends Observable {
                 toRemove.add(bullet);
             }
         }
-        bulletPool.releaseBullets(bullets);
+//        if (toRemove.size() > 0) {
+//            bulletPool.releaseBullets(toRemove);
+//        }
         for(Bullet bullet : toRemove) {
             bullets.remove(bullet);
-//            bulletPool.releaseBullet(bullet);
+            bulletPool.releaseBullet(bullet);
         }
     }
 
@@ -76,19 +78,21 @@ public class Game extends Observable {
 
     public void burstBullets(int x, int y) {
         BulletPool bulletPool = BulletPool.getInstance();
-        List<Bullet> setOfBullets = bulletPool.acquireBullet();
-        if (setOfBullets != null) {
-            bullets.addAll(setOfBullets);
+//        List<Bullet> setOfBullets = bulletPool.acquireBullet();
+        List<Bullet> requestedBullets = bulletPool.acquireBullet();
+        if (requestedBullets.size() == 8) {
+            System.out.println("requestedBullets: " + requestedBullets);
+            bullets.addAll(requestedBullets);
         }
         else {
-//            bulletPool.releaseBullet(new Bullet(x, y, 1, 0));
-//            bulletPool.releaseBullet(new Bullet(x, y, 0, 1));
-//            bulletPool.releaseBullet(new Bullet(x, y, -1, 0));
-//            bulletPool.releaseBullet(new Bullet(x, y, 0, -1));
-//            bulletPool.releaseBullet(new Bullet(x, y, 1, 1));
-//            bulletPool.releaseBullet(new Bullet(x, y, 1, -1));
-//            bulletPool.releaseBullet(new Bullet(x, y, -1, 1));
-//            bulletPool.releaseBullet(new Bullet(x, y, -1, -1));
+////            bulletPool.releaseBullet(new Bullet(x, y, 1, 0));
+////            bulletPool.releaseBullet(new Bullet(x, y, 0, 1));
+////            bulletPool.releaseBullet(new Bullet(x, y, -1, 0));
+////            bulletPool.releaseBullet(new Bullet(x, y, 0, -1));
+////            bulletPool.releaseBullet(new Bullet(x, y, 1, 1));
+////            bulletPool.releaseBullet(new Bullet(x, y, 1, -1));
+////            bulletPool.releaseBullet(new Bullet(x, y, -1, 1));
+////            bulletPool.releaseBullet(new Bullet(x, y, -1, -1));
             bullets.add(new Bullet(x, y, 1, 0));
             bullets.add(new Bullet(x, y, 0, 1));
             bullets.add(new Bullet(x, y, -1, 0));
@@ -97,7 +101,18 @@ public class Game extends Observable {
             bullets.add(new Bullet(x, y, 1, -1));
             bullets.add(new Bullet(x, y, -1, 1));
             bullets.add(new Bullet(x, y, -1, -1));
-            bulletPool.releaseBullets(bullets);
+            System.out.println("Add from game " + bullets);
+//            bulletPool.releaseBullets(bullets);
         }
+//        bullets.add(new Bullet(x, y, 1, 0));
+//        bullets.add(new Bullet(x, y, 0, 1));
+//        bullets.add(new Bullet(x, y, -1, 0));
+//        bullets.add(new Bullet(x, y, 0, -1));
+//        bullets.add(new Bullet(x, y, 1, 1));
+//        bullets.add(new Bullet(x, y, 1, -1));
+//        bullets.add(new Bullet(x, y, -1, 1));
+//        bullets.add(new Bullet(x, y, -1, -1));
+//        System.out.println("Add from game " + bullets);
+//        bulletPool.releaseBullets(bullets);
     }
 }

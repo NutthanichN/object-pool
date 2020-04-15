@@ -4,7 +4,7 @@ import java.util.List;
 public class BulletPool {
 
     private static BulletPool instance = new BulletPool();
-    private List<List<Bullet>> setOfBullets = new ArrayList<List<Bullet>>();
+    private List<Bullet> bullets = new ArrayList<Bullet>();
 
     private BulletPool() {}
 
@@ -13,15 +13,36 @@ public class BulletPool {
     }
 
     public List<Bullet> acquireBullet() {
-        if(setOfBullets.size() > 0) {
-            System.out.println(setOfBullets.remove(0));
-           return setOfBullets.remove(0);
+        System.out.println("---------------------------");
+        System.out.println("Acquire " + bullets);
+        System.out.println("---------------------------");
+//        System.out.println(setOfBullets);
+        List<Bullet> returnBullets = new ArrayList<>();
+        if(bullets.size() > 0) {
+            for(int i = 0; i < 8; i++) {
+                returnBullets.add(bullets.get(i));
+            }
+
+//            System.out.println("Here");
+//            System.out.println(setOfBullets);
+//            List<Bullet> removed = setOfBullets.get(0);
+////            List<Bullet> removed = setOfBullets.remove(0);
+//            System.out.println(removed);
+////            System.out.println("---------------------------");
+////            return removed;
         }
-        System.out.println("null");
-        return null;
+//        else {
+//            System.out.println("null");
+//            System.out.println("---------------------------");
+//        }
+        return returnBullets;
+//        return null;
     }
 
-    public void releaseBullets(List<Bullet> bullets) {
-        setOfBullets.add(bullets);
+    public void releaseBullet(Bullet bullet) {
+        System.out.println("---------------------------");
+        bullets.add(bullet);
+        System.out.println("Release: " + bullets);
+        System.out.println("---------------------------");
     }
 }
