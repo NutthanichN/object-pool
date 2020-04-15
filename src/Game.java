@@ -73,38 +73,17 @@ public class Game extends Observable {
     public void burstBullets(int x, int y) {
         int[] dxList = {1, 0, -1, 0, 1, 1, -1, -1};
         int[] dyList = {0, 1, 0, -1, 1, -1, 1, -1};
-        int index = 1;
         BulletPool bulletPool = BulletPool.getInstance();
-        Bullet firstBullet = bulletPool.acquireBullet();
 
-        if (firstBullet != null) {
-            firstBullet.setAllAttributes(x, y, 1, 0);
-            bullets.add(firstBullet);
-            while (index <= 7) {
-                Bullet bullet = bulletPool.acquireBullet();
-                if (bullet != null) {
-                    bullet.setAllAttributes(x, y, dxList[index], dyList[index]);
-                    bullets.add(bullet);
-                    index++;
-                }
+        for (int i = 0; i < 8; i++) {
+            Bullet bullet = bulletPool.acquireBullet();
+            if (bullet != null) {
+                bullet.setAllAttributes(x, y, dxList[i], dyList[i]);
+                bullets.add(bullet);
             }
-//            for (int i = 1; i < 8; i++) {
-//                Bullet bullet = bulletPool.acquireBullet();
-//                if (bullet != null) {
-//                    bullet.setAllAttributes(x, y, dxList[index], dyList[index]);
-//                    bullets.add(bullet);
-//                }
-//            }
-        }
-        else {
-            bullets.add(new Bullet(x, y, 1, 0));
-            bullets.add(new Bullet(x, y, 0, 1));
-            bullets.add(new Bullet(x, y, -1, 0));
-            bullets.add(new Bullet(x, y, 0, -1));
-            bullets.add(new Bullet(x, y, 1, 1));
-            bullets.add(new Bullet(x, y, 1, -1));
-            bullets.add(new Bullet(x, y, -1, 1));
-            bullets.add(new Bullet(x, y, -1, -1));
+            else {
+                bullets.add(new Bullet(x, y, dxList[i], dyList[i]));
+            }
         }
     }
     
