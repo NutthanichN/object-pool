@@ -35,4 +35,15 @@ public class Bullet {
     public void setY(int y) {
         this.y = y;
     }
+
+    public void setDx(int dx) { this.dx = dx; }
+
+    public void setDy(int dy) { this.dy = dy; }
+
+    public void setAllAttributes(int x, int y, int dx, int dy) {
+        setX(x);
+        setY(y);
+        setDx(dx);
+        setDy(dy);
+    }
 }
