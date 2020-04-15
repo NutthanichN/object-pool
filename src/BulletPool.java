@@ -12,31 +12,36 @@ public class BulletPool {
         return instance;
     }
 
-    public List<Bullet> acquireBullet() {
+//    public List<Bullet> acquireBullet() {
+//        System.out.println("---------------------------");
+//        System.out.println("Acquire " + bullets);
+//        System.out.println("---------------------------");
+////        System.out.println(setOfBullets);
+//        List<Bullet> returnBullets = new ArrayList<>();
+//        if(bullets.size() > 0) {
+//            System.out.println("Here");
+//            for(int i = 0; i < 8; i++) {
+//                returnBullets.add(bullets.get(i));
+//            }
+//            bullets.subList(0, 8).clear();
+//        }
+//        else {
+//            System.out.println("bullet size: " + bullets.size());
+//        }
+//        return returnBullets;
+////        return null;
+//    }
+
+    public Bullet acquireBullet() {
         System.out.println("---------------------------");
         System.out.println("Acquire " + bullets);
         System.out.println("---------------------------");
-//        System.out.println(setOfBullets);
-        List<Bullet> returnBullets = new ArrayList<>();
-        if(bullets.size() > 0) {
-            for(int i = 0; i < 8; i++) {
-                returnBullets.add(bullets.get(i));
-            }
-
-//            System.out.println("Here");
-//            System.out.println(setOfBullets);
-//            List<Bullet> removed = setOfBullets.get(0);
-////            List<Bullet> removed = setOfBullets.remove(0);
-//            System.out.println(removed);
-////            System.out.println("---------------------------");
-////            return removed;
+        if (bullets.size() > 0) {
+            Bullet bullet = bullets.get(0);
+            bullets.remove(0);
+            return bullet;
         }
-//        else {
-//            System.out.println("null");
-//            System.out.println("---------------------------");
-//        }
-        return returnBullets;
-//        return null;
+        return null;
     }
 
     public void releaseBullet(Bullet bullet) {
